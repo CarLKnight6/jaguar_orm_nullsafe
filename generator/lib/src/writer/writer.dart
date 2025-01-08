@@ -13,7 +13,7 @@ class Writer {
   }
 
   void _generate() {
-    _w.writeln('abstract class _${_b.name} implements Bean<${_b.modelType}> {');
+    _w.writeln('mixin _${_b.name} implements Bean<${_b.modelType}> {');
 
     for (Field field in _b.fields.values) {
       _writeln(
