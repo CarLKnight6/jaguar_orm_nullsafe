@@ -9,11 +9,15 @@ class UpdateMany implements Statement /*, Whereable */ {
     _immutable = ImmutableUpdateManyStatement(this);
   }
 
-  UpdateMany addAll(List<List<SetColumn>> items, List<Expression> where) {
+  UpdateMany addAll(List<List<SetColumn>> items, List<Expression?> where) {
     _bulkValues.clear();
+
     for (var i = 0; i < items.length; ++i) {
       var item = items[i];
       var w = where[i];
+
+      if (w == null) continue; // Skip this update if `where` is null
+
       _bulkValues.add(Update(
         name,
         where: w,
